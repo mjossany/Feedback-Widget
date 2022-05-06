@@ -22,6 +22,7 @@ interface Props {
 }
 
 export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props) {
+  const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
 
   const feedbackTypeInfo = feedbackTypes[feedbackType];
@@ -37,6 +38,13 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
 
   function handleScreenshotRemove() {
     setScreenshot(null);
+  }
+
+  function handleSendFeedback() {
+    if(isSendingFeedback) {
+      return;
+    }
+    setIsSendingFeedback(true);
   }
 
   return (
@@ -72,7 +80,11 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
           onRemoveShot={handleScreenshotRemove}
           screenshot={screenshot}
         />
-        <Button isLoading={false} />
+        <Button
+          isLoading={isSendingFeedback}
+          onPress={handleSendFeedback}
+
+        />
       </View>
     </View>
   );
