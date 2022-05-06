@@ -60,7 +60,7 @@ function Widget() {
               <Form 
                 feedbackType={feedbackType}
                 onFeedbackCanceled={handleRestartFeedback}
-                onFeedbackSend={handleFeedbackSent}
+                onFeedbackSent={handleFeedbackSent}
               />
               :
               <Options onFeedbackTypeChanged={setFeedbackType} />

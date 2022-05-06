@@ -20,10 +20,10 @@ import * as FileSystem from 'expo-file-system';
 interface Props {
   feedbackType: FeedbackType;
   onFeedbackCanceled: () => void;
-  onFeedbackSend: () => void;
+  onFeedbackSent: () => void;
 }
 
-export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props) {
+export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSent }: Props) {
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment, setComment] = useState("");
@@ -33,7 +33,7 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
   function handleScreenshot() {
     captureScreen({
       format: 'jpg',
-      quality: 0.8
+      quality: 0.5
     })
     .then(uri => setScreenshot(uri))
     .catch(error => console.log(error));
@@ -44,18 +44,24 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
   }
 
   async function handleSendFeedback() {
+
     if(isSendingFeedback) {
       return;
     }
+
     setIsSendingFeedback(true);
-    const screenshotBase64 = screenshot && FileSystem.readAsStringAsync(screenshot, { encoding: 'base64' });
+
+    const screenshotBase64 = screenshot && await FileSystem.readAsStringAsync(screenshot, { encoding: 'base64' });
+    console.log(screenshotBase64)
     try {
       await api.post('/feedbacks', {
         type: feedbackType,
         screenshot: `data:image/png;base64, ${screenshotBase64}`,
         comment
       });
-      onFeedbackSend();
+
+      onFeedbackSent();
+
     } catch (error) {
       console.log(error);
       setIsSendingFeedback(false);
