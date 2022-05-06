@@ -8,6 +8,7 @@ import { theme } from '../../theme';
 import { Options } from '../Options';
 import { feedbackTypes } from '../../utils/feedbackTypes';
 import { Form } from '../Form';
+import { Success } from '../Success';
 
 export type FeedbackType = keyof typeof feedbackTypes;
 
@@ -41,6 +42,7 @@ function Widget() {
         <Form 
           feedbackType='BUG'
         />
+        {/* <Success /> */}
       </BottomSheet>
     </>
   );
