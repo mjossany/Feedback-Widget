@@ -26,7 +26,6 @@ export function Option({ title, image, ...rest}: Props) {
       <Text style={styles.title}>
         {title}
       </Text>
-
     </TouchableOpacity>
   );
 }
