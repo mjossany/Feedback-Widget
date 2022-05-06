@@ -14,6 +14,8 @@ import { ScreenshotButton } from '../ScreenshotButton';
 import { FeedbackType } from '../Widget';
 import { styles } from './styles';
 import { captureScreen } from 'react-native-view-shot';
+import { api } from '../../libs/api';
+import * as FileSystem from 'expo-file-system';
 
 interface Props {
   feedbackType: FeedbackType;
@@ -24,6 +26,7 @@ interface Props {
 export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props) {
   const [isSendingFeedback, setIsSendingFeedback] = useState(false);
   const [screenshot, setScreenshot] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
 
   const feedbackTypeInfo = feedbackTypes[feedbackType];
 
@@ -40,11 +43,23 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
     setScreenshot(null);
   }
 
-  function handleSendFeedback() {
+  async function handleSendFeedback() {
     if(isSendingFeedback) {
       return;
     }
     setIsSendingFeedback(true);
+    const screenshotBase64 = screenshot && FileSystem.readAsStringAsync(screenshot, { encoding: 'base64' });
+    try {
+      await api.post('/feedbacks', {
+        type: feedbackType,
+        screenshot: `data:image/png;base64, ${screenshotBase64}`,
+        comment
+      });
+      onFeedbackSend();
+    } catch (error) {
+      console.log(error);
+      setIsSendingFeedback(false);
+    }
   }
 
   return (
@@ -73,6 +88,7 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
         placeholder="Algo não está funcionando bem? Queremos corrigir. Conte com detalhes o que está acontecendo..."
         placeholderTextColor={theme.colors.text_secondary }
         autoCorrect={false}
+        onChangeText={setComment}
       />
       <View style={styles.footer}>
         <ScreenshotButton
@@ -83,7 +99,6 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSend }: Props
         <Button
           isLoading={isSendingFeedback}
           onPress={handleSendFeedback}
-
         />
       </View>
     </View>
