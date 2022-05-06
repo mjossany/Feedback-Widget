@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
-import { Widget } from './src/components/Widget';
+import Widget from './src/components/Widget';
 import { theme } from './src/theme';
 import AppLoading from 'expo-app-loading';
 
