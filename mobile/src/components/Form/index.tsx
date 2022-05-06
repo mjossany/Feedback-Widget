@@ -33,7 +33,7 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSent }: Props
   function handleScreenshot() {
     captureScreen({
       format: 'jpg',
-      quality: 0.5
+      quality: 0.8
     })
     .then(uri => setScreenshot(uri))
     .catch(error => console.log(error));
@@ -52,7 +52,7 @@ export function Form({ feedbackType, onFeedbackCanceled, onFeedbackSent }: Props
     setIsSendingFeedback(true);
 
     const screenshotBase64 = screenshot && await FileSystem.readAsStringAsync(screenshot, { encoding: 'base64' });
-    console.log(screenshotBase64)
+
     try {
       await api.post('/feedbacks', {
         type: feedbackType,
