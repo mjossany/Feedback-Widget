@@ -38,6 +38,12 @@ export function Form({ feedbackType }: Props) {
           </Text>
         </View>
       </View>
+      <TextInput 
+        multiline
+        style={styles.input}
+        placeholder="Algo não está funcionando bem? Queremos corrigir. Conte com detalhes o que está acontecendo..."
+        placeholderTextColor={theme.colors.text_secondary }
+      />
     </View>
   );
 }

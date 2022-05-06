@@ -26,5 +26,15 @@ export const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginRight: 8
+  },
+  input: {
+    height: 112,
+    padding: 12,
+    marginBottom: 8,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: theme.colors.stroke,
+    color: theme.colors.text_primary,
+    fontFamily: theme.fonts.regular
   }
 });
