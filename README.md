@@ -1,7 +1,7 @@
 # Feedget
 
 ## 💻 Project
-A Feedback Widget to collect user's feedback on any web and mobile application.
+A [Feedback Widget](https://feedback-widget-web-chi.vercel.app/) to collect user's feedback on any web and mobile application.
 
 ## ✨ Tecnologias
 
