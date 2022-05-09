@@ -14,7 +14,7 @@ export function Options({ onFeedbackTypeChanged }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Deixe seu feedback
+        We want your feedback
       </Text>
       <View style={styles.options}>
         {
