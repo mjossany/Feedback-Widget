@@ -22,14 +22,14 @@ export function Success({ onSendAnotherFeedback }: Props) {
         style={styles.image}
       />
       <Text style={styles.title}>
-        Agradecemos o feedback
+        Thank you for your feedback!
       </Text>
       <TouchableOpacity
         style={styles.button}
         onPress={onSendAnotherFeedback}
       >
         <Text style={styles.buttonTitle}>
-          Quero enviar outro
+          I want to send another feedback!
         </Text>
       </TouchableOpacity>
       <Copyright />
