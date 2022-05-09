@@ -35,4 +35,17 @@ After that, start the back-end on server folder.
 npm run dev
 ```
 
+## Next Improvements
+
+- Dark and light mode;
+- Use a mail service on production like mailgun;
+- Improve the HTML/CSS of the feedback email sent;
+- Create a feedback dashboard;
+- Improve validations and error handling on back-end;
+
+## Deploy
+I deployed the front-end on [Vercel](https://vercel.com/) and back-end on [Railway](https://railway.app/).
+
+<h1><a href="https://feedback-widget-web-chi.vercel.app/">Feedget</a></h1>
+
 <br />
